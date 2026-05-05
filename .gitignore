@@ -8,4 +8,4 @@ log/
 *.pyc
 __pycache__/
 .DS_Store
-src/husky_ur5_cleaner/meshes/
+src/husky_ur5_cleaner/geotif/
