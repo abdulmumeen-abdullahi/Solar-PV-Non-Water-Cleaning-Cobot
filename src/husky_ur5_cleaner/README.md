@@ -77,7 +77,8 @@ husky_ur5_ws/                          (ROS 2 Workspace Root)
 │
 ├── .gitattributes                     (Git LFS/Attributes)
 ├── .gitignore                         (Git ignore rules)         
-├── images/                            (images and media of the project)
+├── images/                            (images and media of the project)         
+├── README.md                          (project documentation)
 │
 └── src/
     └── husky_ur5_cleaner/             (Main ROS 2 Package)
@@ -135,13 +136,6 @@ The Husky A200 + UR5 cobot spawned inside the custom solar farm Gazebo world.
 ![Gazebo Simulation](images/husky_ur5_gazebo_simulation.png)
 
 ---
-
-<!-- ### 🟦 Gazebo — Mobile Base Navigation (Teleoperation)
-Validation run of the Husky A200 being driven via teleoperation across the solar farm environment.
-
-> 🎥 [Watch the Gazebo driving demo](images/husky_ur5_gazebo_driving_demo.mp4)
-
---- -->
 
 ### 🟦 GeoTIFF — Solar Environment Overhead Map
 Top-down geospatial map of the solar farm environment used as a localization reference layer.
