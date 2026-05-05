@@ -136,12 +136,12 @@ The Husky A200 + UR5 cobot spawned inside the custom solar farm Gazebo world.
 
 ---
 
-<!-- ### 🟦 Gazebo — Mobile Base Navigation (Teleoperation)
+### 🟦 Gazebo — Mobile Base Navigation (Teleoperation)
 Validation run of the Husky A200 being driven via teleoperation across the solar farm environment.
 
 > 🎥 [Watch the Gazebo driving demo](images/husky_ur5_gazebo_driving_demo.mp4)
 
---- -->
+---
 
 ### 🟦 GeoTIFF — Solar Environment Overhead Map
 Top-down geospatial map of the solar farm environment used as a localization reference layer.
