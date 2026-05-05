@@ -1,0 +1,50 @@
+# Launch UR5
+ros2 launch ur_description view_ur.launch.py ur_type:=ur5
+
+ros2 launch urdf_launch display.launch.py \
+  urdf_package:=husky_ur5_cleaner \
+  urdf_package_path:=urdf/ur5/ur5_view.urdf.xacro
+
+
+
+# Launch Husky
+ros2 launch clearpath_viz view_model.launch.py setup_path:=/etc/clearpath/
+
+ros2 launch urdf_launch display.launch.py \
+  urdf_package:=husky_ur5_cleaner \
+  urdf_package_path:=urdf/a200/husky_view.urdf.xacro
+  
+
+
+
+ros2 launch husky_ur5_cleaner view_robot.launch.py
+
+
+
+
+
+#Build
+colcon build --symlink-install --packages-up-to clearpath_gz clearpath_simulator husky_ur5_cleaner
+
+
+colcon build --packages-select husky_ur5_cleaner --symlink-install
+
+
+
+
+# Launch Gazebo
+ros2 launch clearpath_gz simulation.launch.py \
+  setup_path:=$HOME/Projects/clearpath_ws/src/clearpath_config/ \
+  world:=solar_farm
+  
+  #####=====================
+ros2 launch husky_ur5_cleaner view_robot.launch.py
+
+
+
+ros2 launch husky_ur5_cleaner solar_farm_research.launch.py
+
+
+
+ros2 run teleop_twist_keyboard teleop_twist_keyboard \
+  --ros-args -r /cmd_vel:=/model/husky_ur5_cobot/cmd_vel

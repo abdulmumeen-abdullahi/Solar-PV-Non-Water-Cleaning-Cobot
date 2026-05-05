@@ -1,0 +1,10 @@
+# Ignore ROS build artifacts
+build/
+install/
+log/
+
+# Ignore system files
+.vscode/
+*.pyc
+__pycache__/
+.DS_Store

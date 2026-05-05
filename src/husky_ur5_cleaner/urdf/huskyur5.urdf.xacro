@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="husky_ur5_cleaner">
+
+  <xacro:arg name="ur_type" default="ur5"/>
+  <xacro:include filename="$(find husky_ur5_cleaner)/urdf/ur5/ur_macro.xacro"/>
+
+  <!-- Materials -->
+  <xacro:include filename="$(find husky_ur5_cleaner)/urdf/materials.xacro"/>
+
+  <!-- Husky -->
+  <xacro:include filename="$(find husky_ur5_cleaner)/urdf/a200/a200.urdf.xacro"/>
+
+  <!-- Custom links and joints (riser, brush, etc.) -->
+  <xacro:include filename="$(find husky_ur5_cleaner)/urdf/links.xacro"/>
+  <xacro:include filename="$(find husky_ur5_cleaner)/urdf/joints.xacro"/>
+
+  <!-- Instantiate Husky (this brings in gz_ros2_control plugin automatically) -->
+  <xacro:a200
+      control="diff_4wd"
+      front_wheels="outdoor"
+      rear_wheels="outdoor"/>
+
+
+  <!-- UR5 -->
+
+  <xacro:ur_robot
+      name="ur"
+      tf_prefix="ur_"
+      parent="riser_link"
+      joint_limits_parameters_file="$(find husky_ur5_cleaner)/config/ur5/joint_limits.yaml"
+      kinematics_parameters_file="$(find husky_ur5_cleaner)/config/ur5/default_kinematics.yaml"
+      physical_parameters_file="$(find husky_ur5_cleaner)/config/ur5/physical_parameters.yaml"
+      visual_parameters_file="$(find husky_ur5_cleaner)/config/ur5/visual_parameters.yaml"
+      safety_limits="false">
+      
+      <origin xyz="0.0 0.0 0.40" rpy="0 0 3.1416"/> 
+      <!-- changed 0.50 to 0.25 -->
+    </xacro:ur_robot>
+
+  
+  <!-- mandatory bridge that makes Gazebo read <ros2_control> tags -->
+  <gazebo>
+    <plugin filename="libgz_ros2_control-system.so"
+            name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <robot_param>robot_description</robot_param>
+      <robot_param_node>robot_state_publisher</robot_param_node>
+      <parameters>$(find husky_ur5_cleaner)/config/ur5/ur5_controllers.yaml</parameters>
+    </plugin>
+  </gazebo>
+
+  <!-- Gazebo native differential drive (A200Hardware is real-robot only, not sim) -->
+  <gazebo>
+    <plugin filename="libgz-sim-diff-drive-system.so"
+            name="gz::sim::systems::DiffDrive">
+      <left_joint>front_left_wheel_joint</left_joint>
+      <left_joint>rear_left_wheel_joint</left_joint>
+      <right_joint>front_right_wheel_joint</right_joint>
+      <right_joint>rear_right_wheel_joint</right_joint>
+      <wheel_separation>0.5708</wheel_separation>
+      <wheel_radius>0.1651</wheel_radius>
+      <odom_publish_frequency>20</odom_publish_frequency>
+      <topic>/model/husky_ur5_cobot/cmd_vel</topic>
+      <odom_topic>/model/husky_ur5_cobot/odometry</odom_topic>
+      <frame_id>odom</frame_id>
+      <child_frame_id>base_link</child_frame_id>
+      <tf_topic>/model/husky_ur5_cobot/tf</tf_topic>
+    </plugin>
+  </gazebo>
+
+  <!-- Publish all joint states from Gazebo so robot_state_publisher gets them -->
+  <gazebo>
+    <plugin filename="libgz-sim-joint-state-publisher-system.so"
+            name="gz::sim::systems::JointStatePublisher">
+      <topic>/model/husky_ur5_cobot/joint_states</topic>
+    </plugin>
+  </gazebo>
+
+
+
+
+
+</robot>
+
+

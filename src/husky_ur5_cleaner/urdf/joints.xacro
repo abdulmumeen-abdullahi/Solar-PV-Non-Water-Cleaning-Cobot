@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Riser sits on Husky top plate -->
+  <!-- <joint name="riser_joint" type="fixed">
+    <parent link="top_chassis_link"/>
+    <child link="riser_link"/>
+    <origin xyz="0.0 0.0 0.35" rpy="0 0 0"/>
+  </joint> -->
+
+
+  <!-- Claude: In joints.xacro — more compact profile -->
+  <joint name="riser_joint" type="fixed">
+    <parent link="top_chassis_link"/>
+    <child link="riser_link"/>
+    <origin xyz="0.0 0.0 0.15" rpy="0 0 0"/>  <!-- was 0.35 -->
+  </joint>
+
+  <!-- Brush attaches to UR5 tool -->
+  <joint name="brush_joint" type="fixed">
+    <parent link="ur_tool0"/>
+    <child link="brush_link"/>
+    <origin xyz="0.0 0.0 0.1" rpy="0 0 0"/>
+  </joint>
+
+</robot>

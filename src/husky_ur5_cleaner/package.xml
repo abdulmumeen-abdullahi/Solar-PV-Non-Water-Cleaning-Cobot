@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>husky_ur5_cleaner</name>
+  <version>0.0.1</version>
+  <description>Husky + UR5 cleaning robot</description>
+  <maintainer email="you@example.com">Your Name</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>urdf</depend>
+  <depend>xacro</depend>
+  <depend>robot_state_publisher</depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

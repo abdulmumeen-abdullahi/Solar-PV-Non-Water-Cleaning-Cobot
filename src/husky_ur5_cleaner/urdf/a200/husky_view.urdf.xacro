@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="husky_test">
+
+  <xacro:include filename="$(find husky_ur5_cleaner)/urdf/a200/a200.urdf.xacro" />
+
+  <xacro:a200 front_wheels="outdoor" rear_wheels="outdoor" />
+
+</robot>
